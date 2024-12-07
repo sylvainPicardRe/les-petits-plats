@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.hero {
+    background-image: url('../images/background-header.jpg');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    height: 70vh;
+}
+
+.hero__logo {
+    width: 15rem !important;
+}
+
+.hero__title {
+    font-family: "Anton", "sans-serif";
+    font-weight: 400;
+    color: #FFD15B;
+    text-align: center;
+    align-self: center;
+}
+
+.hero__search {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    align-self: center;
+}
+
+.hero__search input {
+    padding-left: 2rem;
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    font-size: 20px;
+}
+
+.hero__search button {
+    border: 0;
+    width: 60px;
+    height: 60px;
+    background-color: #1b1b1b;
+    color: #fff;
+    font-size: 2rem;
+}
