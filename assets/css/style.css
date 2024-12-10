@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
+.hero__title, .card-title {
+    font-family: "Anton", "sans-serif";
+    font-weight: 400;
+}
+
 .hero {
     background-image: url('../images/background-header.jpg');
     background-size: 100%;
@@ -14,8 +19,6 @@
 }
 
 .hero__title {
-    font-family: "Anton", "sans-serif";
-    font-weight: 400;
     color: #FFD15B;
     text-align: center;
     align-self: center;
@@ -45,4 +48,26 @@
     background-color: #1b1b1b;
     color: #fff;
     font-size: 2rem;
+}
+
+.card {
+    width: 25rem;
+    margin: auto;
+    min-height: 750px;
+}
+
+.card img {
+    object-fit: cover;
+    height: 250px;
+}
+
+.card h6 {
+    color: #7A7A7A;
+}
+
+.card__description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
