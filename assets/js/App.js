@@ -2,6 +2,7 @@ import { recipes } from "../data/recipes.js"
 import { Recipe } from "./models/Recipe.js"
 import { RecipeCard } from "./templates/RecipeCard.js"
 import { RecipesCount } from "./templates/RecipesCount.js"
+import { FiltersForm } from "./templates/FiltersForm.js"
 
 class App {
     constructor() {
@@ -18,6 +19,9 @@ class App {
         this.$recipesCount.appendChild(
             Template.createRecipesCount()
         )
+
+        const Filter = new FiltersForm(this._recipes)
+        Filter.render()
 
         this._recipes
         .map(recipe => new Recipe(recipe))
