@@ -9,7 +9,7 @@ export class FiltersForm {
         this.$wrapper = document.createElement( 'div' )
         this.$wrapper.classList.add( 'd-flex' )
         this.$wrapper.classList.add( 'gap-5' )
-        this.$filtersFormWrapper = document.querySelector( '.filters-form-wrapper' )
+        this.$filtersFormWrapper = document.querySelector( '.dropdown-wrapper' )
         this.$recipesWrapper = document.querySelector( '.recipes-wrapper' )
 
     }
@@ -17,7 +17,7 @@ export class FiltersForm {
     async filterRecipes(filtre) {
         this.clearRecipesWrapper()
        
-        const AdaptedFilterLib = new FilterRecipesAdapter(this._Recipes, filtre)
+        const AdaptedFilterLib = new FilterRecipesAdapter(this.Recipes, filtre)
         const FilteredRecipes = await AdaptedFilterLib.filterByAppliance()
 
         FilteredRecipes.forEach(recipe => {
@@ -63,11 +63,16 @@ export class FiltersForm {
                         <input type="search" id="search-${type}" onkeyup="filter('search-${type}', '${dropdownId}')">
                         <button class="search__button px-2"><i class="fas fa-search"></i></button>
                     </form>                       
-                    <div class="filter-items mx-4">
+                    <ul class="dropdown-list">
                     ${items.map(item => 
-                        `<a class="py-2 px-0" href="#${item}">${item.charAt(0).toUpperCase() + item.slice(1)}</a>`
+                        `
+                        <li class="dropdown-item">
+                            <a class="py-2 px-4" href="#${item}">${item.charAt(0).toUpperCase() + item.slice(1)}</a>
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </li>
+                        `
                     ).join('')}
-                    </div>
+                    </ul>
                 </div>
             </div>
         `
@@ -100,6 +105,19 @@ export class FiltersForm {
         })
     }
 
+    trierFiltres() {
+        document.querySelectorAll('a').forEach(item => {
+            item.addEventListener('click', e => {
+                const itemLi = e.target.parentElement
+                const itemI = itemLi.children[1]
+                // const itemLink = e.target
+
+                itemLi.classList.toggle('highlight')
+                itemI.classList.toggle('show')
+            })
+        })
+    }
+
     render() {
 
         const filtersForm = `
@@ -115,6 +133,9 @@ export class FiltersForm {
         this.$filtersFormWrapper.appendChild(this.$wrapper)
 
         this.toggleShow()
+
+        this.trierFiltres()
+
     }
 
 }

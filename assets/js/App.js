@@ -9,6 +9,10 @@ class App {
         this.$recipesWrapper = document.querySelector('.recipes-wrapper')
         this.$recipesFilters = document.querySelector('.recipes-filters')
         this.$recipesCount = document.querySelector('.recipes-count')
+        this.$dropdownWrapper = document.querySelector('.dropdown-wrapper')
+
+        this.$search = document.querySelector('.hero__search')
+        this.$wrapper = document.querySelector( '.recipes-wrapper' )
         
         this._recipes = recipes
     }
@@ -31,6 +35,10 @@ class App {
                 Template.createRecipeCard()
             )
         })
+
+            // TODO METTRE A JOUR LES LISTE
+            // TODO SUPPRESSION DES TAGS
+            // TODO AFFICHER LES TAGS SONT LES FILTRES
 
 
     }
