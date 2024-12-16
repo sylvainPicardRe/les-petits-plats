@@ -19,6 +19,7 @@ export class RecipeCard {
 
         const recipeCard = `
             <div class="card">
+                <p class="card__time">${this._recipe.time} min</p>
                 <img src="${this._recipe.imgSrc}" class="card-img-top" alt="${this._recipe.name}">
                 <div class="card-body container-fluid pb-5">
                     <h5 class="card-title my-3">${this._recipe.name}</h5>

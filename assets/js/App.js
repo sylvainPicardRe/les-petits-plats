@@ -36,6 +36,8 @@ class App {
             )
         })
 
+        
+
             // TODO METTRE A JOUR LES LISTE
             // TODO SUPPRESSION DES TAGS
             // TODO AFFICHER LES TAGS SONT LES FILTRES

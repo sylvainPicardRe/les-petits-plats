@@ -69,6 +69,15 @@ body {
     color: #7A7A7A;
 }
 
+.card__time {
+    background-color: #FFD15B;
+    border-radius: 2rem;
+    position: absolute;
+    right: 0;
+    padding: 0.5rem 1rem;
+    margin: 1rem;
+}
+
 .card__description {
     display: -webkit-box;
     -webkit-line-clamp: 4;
@@ -144,13 +153,13 @@ body {
     text-align: start;
 }
 
+.dropdown-content li:hover {
+    background-color: #fff;
+}
+
 .dropdown-content a:hover {
     font-weight: 700;
     color: black;
-}
-
-.dropdown-content a:hover i{
-    v: block;
 }
 
 .dropbtn {
