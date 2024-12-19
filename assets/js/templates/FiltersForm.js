@@ -1,6 +1,7 @@
 import { Recipe } from "../models/Recipe.js"
 import { FilterRecipesAdapter } from "../../adapters/FilterRecipesAdapter.js"
 import { RecipeCard } from "./RecipeCard.js"
+import { Tag } from "./Tag.js"
 
 export class FiltersForm {
     constructor(Recipes) {
@@ -27,6 +28,52 @@ export class FiltersForm {
         });
         
         
+    }
+
+    tag() {
+        const dropdowItems = document.querySelectorAll('.dropdown-item')
+        const tagWrapper = document.querySelector('.tags-wrapper')
+        const tags = tagWrapper.childNodes
+        
+        dropdowItems.forEach(item => {
+            item.addEventListener('click', e => {
+                const tag = e.target.text
+                // this.addTag(tag)
+            })
+            tags.forEach(tag => {
+                console.log(tag)
+            })
+        })
+        
+
+        console.log(tags)
+
+        tags.forEach(tag => {
+            console.log(tag)
+        })
+        
+        tagWrapper.childNodes.forEach(tag => {
+            console.log(tag)
+        })
+        
+        // tagWrapper.childNodes.foraddEventListener('click', e => {
+        //     const tag = e.target
+        //     this.removeTag(tag)
+        // })
+
+
+    }
+
+    addTag(tag) {
+        const tagWrapper = document.querySelector('.tags-wrapper')
+        const Template = new Tag(tag)
+        tagWrapper.appendChild( Template.createTag())
+    }
+
+    removeTag(tag) {
+        const tagWrapper = document.querySelector('.tags-wrapper')
+        // tagWrapper.removeChild(tag)
+        console.log(tag)
     }
 
     onChangeFilter() {
@@ -135,6 +182,8 @@ export class FiltersForm {
         this.toggleShow()
 
         this.trierFiltres()
+
+        this.tag()
 
     }
 

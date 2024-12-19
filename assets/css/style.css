@@ -198,3 +198,37 @@ body {
 .highlight {
     background-color: #FFD15B !important;
 }
+
+.tags-wrapper {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+}
+
+.tag {
+    background-color: #FFD15B;
+    border-radius: 1rem;
+    
+}
+
+.tag a {
+    display: flex;
+    justify-content: space-around;
+    gap: 3rem;
+    text-decoration: none;
+    color: #1b1b1b;
+}
+
+.tag a:hover{
+    font-weight: bold;
+    color: #1b1b1b;
+}
+
+.tag p {
+    margin: auto;
+}
+
+.tag i {
+    margin: auto;
+    text-align: center;
+}
