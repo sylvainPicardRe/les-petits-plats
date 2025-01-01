@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+/* variables globales */
+:root {
+    --yellow: #FFD158;
+    --black: #1B1B1B;
+    --gray: #7A7A7A;
+    --bg-color: #E5E5E5; 
+}
+
+body {
+    background-color: var(--bg-color) !important;
+    font-family: "Anton", sans-serif;
+}
