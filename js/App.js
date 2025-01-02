@@ -5,6 +5,12 @@ class App {
         this.recipesApi = new RecipeApi('./data/recipes.json');
         
         this.FullRecipes = [];
+
+        //TagLib Pub/Sub
+        this.TagListSubject = new TagListSubject()
+        this.TagListCounter = new TagListCounter()
+
+        this.TagListSubject.subscribe(this.TagListCounter)
     }
 
     async fetchRecipes() {
@@ -16,7 +22,7 @@ class App {
     }
 
     async renderFilterForm() {
-        const Template = new FilterForm(this.FullRecipes)
+        const Template = new FilterForm(this.FullRecipes, this.TagListSubject)
         Template.render()
     }
 

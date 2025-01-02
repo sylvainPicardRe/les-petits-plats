@@ -166,7 +166,6 @@ h1, h5{
     color: #7A7A7A;
 }
 
-
 /* Style général pour les cartes*/
 
 .recipes-wrapper {
@@ -213,4 +212,40 @@ h1, h5{
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+/* Style général pour les tags*/
+
+.tags-wrapper {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+}
+
+.tag {
+    background-color: #FFD15B;
+    border-radius: 1rem;
+    
+}
+
+.tag a {
+    display: flex;
+    justify-content: space-around;
+    gap: 3rem;
+    text-decoration: none;
+    color: #1b1b1b;
+}
+
+.tag a:hover{
+    font-weight: bold;
+    color: #1b1b1b;
+}
+
+.tag p {
+    margin: auto;
+}
+
+.tag i {
+    margin: auto;
+    text-align: center;
 }

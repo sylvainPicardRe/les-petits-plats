@@ -1,6 +1,9 @@
 class FilterForm {
-    constructor(Recipes) {
+    constructor(Recipes, tagListSubject) {
         this.Recipes = Recipes;
+        this.tagListSubject = tagListSubject
+
+        console.log(this.tagListSubject)
 
         this.$wrapper = document.createElement( 'div' );
         this.$wrapper.classList.add( 'filter-wrapper' );
@@ -8,6 +11,7 @@ class FilterForm {
 
         this.$filterFormWrapper = document.querySelector( '.filter-form-wrapper' )
         this.$recipesWrapper = document.querySelector( '.recipes-wrapper' )
+        this.$tagsWrapper = document.querySelector( '.tags-wrapper' )
     }
 
     createDropdown(title, dropdownId, type) {
@@ -59,10 +63,6 @@ class FilterForm {
         const AdaptedFilterLib = new FilterRecipesAdapter(this.Recipes, query, list)
         const FilterdRecipes = await AdaptedFilterLib.filterByCriterion()
 
-        console.log(AdaptedFilterLib)
-        console.log(FilterdRecipes)
-
-
         FilterdRecipes.forEach(Recipe => {
             const Template = new RecipeCard(Recipe)
             this.$recipesWrapper.appendChild(Template.createRecipeCard())
@@ -70,6 +70,8 @@ class FilterForm {
     }
 
     onChangeFilter() {
+        const that = this
+
         this.$wrapper
             .querySelectorAll('.dropdown')
             .forEach(dropdown => {
@@ -77,6 +79,14 @@ class FilterForm {
                     const query = e.target.text
                     const list = dropdown.lastElementChild.classList[4]
                     this.filterRecipes(query, list)
+                    that.tagListSubject.fire('add', query)
+
+                    this.clearTagsWrapper()
+
+                    that.tagListSubject._observer[0]._list.forEach(tagName => {
+                        const Template = new Tag(tagName)
+                        this.$tagsWrapper.appendChild(Template.createTag())
+                    })
                 })
             }) 
         
@@ -84,6 +94,10 @@ class FilterForm {
 
     clearRecipesWrapper() {
         this.$recipesWrapper.innerHTML = ""
+    }
+
+    clearTagsWrapper() {
+        this.$tagsWrapper.innerHTML = ""
     }
 
     toggleShow() {
