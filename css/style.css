@@ -16,7 +16,52 @@ h1, h5{
     font-family: "Anton", sans-serif !important;
 }
 
+/* Style général pour le header*/
 
+.hero {
+    background-image: url('../assets/images/background-header.jpg');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    height: 30rem;
+}
+
+.hero__logo {
+    width: 15rem !important;
+}
+
+.hero__title {
+    color: var(--yellow);
+    text-align: center;
+    align-self: center;
+}
+
+.hero__search {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    align-self: center;
+}
+
+.hero__search input {
+    padding-left: 2rem;
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    font-size: 20px;
+}
+
+.hero__search button {
+    border: 0;
+    width: 60px;
+    height: 60px;
+    background-color: var(--black);
+    color: #fff;
+    font-size: 2rem;
+}
 
 /* Style général pour les cartes*/
 

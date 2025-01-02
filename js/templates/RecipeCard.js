@@ -4,19 +4,15 @@ export class RecipeCard {
         
         this.$wrapper = document.createElement( 'div' );
         this.$wrapper.classList.add( 'recipe-card-wrapper' );
-        // this.$wrapper.classList.add( 'col-4' );
-        // this.$wrapper.classList.add( 'mb-5' );
     }
 
     get recipe() {
-        return this._recipe
+        return this._recipe;
     }
 
     createRecipeCard() {
-        const $wrapper = document.createElement( 'div' )
-        $wrapper.classList.add('recipe-card-wrapper')
-        // $wrapper.classList.add('col-4')
-        // $wrapper.classList.add('mb-5')
+        const $wrapper = document.createElement( 'div' );
+        $wrapper.classList.add('recipe-card-wrapper');
 
         const ingredientsList = this._recipe.ingredients
         .map(item => `
@@ -42,7 +38,7 @@ export class RecipeCard {
             </div>
         `
 
-        $wrapper.innerHTML = recipeCard
-        return $wrapper
+        $wrapper.innerHTML = recipeCard;
+        return $wrapper;
     }
 }
