@@ -15,7 +15,7 @@ class Api {
     }
 }
 
-export class RecipeApi extends Api {
+class RecipeApi extends Api {
     /**
      * 
      * @param {string} url

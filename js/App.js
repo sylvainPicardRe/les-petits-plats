@@ -1,8 +1,3 @@
-import {RecipeApi} from "./api/Api.js";
-import { Recipe } from "./models/Recipe.js";
-import { RecipeCard } from "./templates/RecipeCard.js";
-
-
 class App {
     constructor() {
         this.$recipesWrapper = document.querySelector('.recipes-wrapper');
@@ -20,8 +15,14 @@ class App {
         this.FullRecipes = Recipes;
     }
 
+    async renderFilterForm() {
+        const Template = new FilterForm(this.FullRecipes)
+        Template.render()
+    }
+
     async init() {
         await this.fetchRecipes();
+        await this.renderFilterForm();
 
         this.FullRecipes.forEach(recipe => {
             const Template = new RecipeCard(recipe)

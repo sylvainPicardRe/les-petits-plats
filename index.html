@@ -24,23 +24,38 @@
           <h1 class="col-12 w-50 hero__title">CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES</h1>
           <div class="search-form-wrapper">
           </div>
-      </div>
+        </div>
       </div>
     </header>
 
-    <div class="recipes-filters-count-wrapper container my-5 mb-5">
-      <div class="dropdown-wrapper"></div>
-      <div class="recipes-count p-0"></div>
+    <div>
+      <div class="filter-form-wrapper container"></div>
     </div>
 
     <div class="container tags-wrapper"></div>
     
     <main class="container">
-      <div class="recipes-wrapper mt-5"></div>
+      <div class="recipes-wrapper"></div>
     </main>
 
+    <!-- Lib -->
+    <script src="./lib/Filter/index.js"></script>
+
+    <!-- Models -->
+    <script src="./js/models/Recipe.js"></script>
+
+    <!-- Adapters -->
+    <script src="js/adapters/FilterRecipesAdapter.js"></script>
+
+    <!-- Templates -->
+    <script src="./js/templates/RecipeCard.js"></script>
+    <script src="./js/templates/FilterForm.js"></script>
+
+    <!-- Api -->
+    <script src="./js/api/Api.js"></script>
+
     <!-- Entry point -->
-     <script type="module" src="./js/App.js"></script>
+    <script src="./js/App.js"></script>
 
   </body>
 </html>

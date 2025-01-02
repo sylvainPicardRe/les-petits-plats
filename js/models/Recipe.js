@@ -1,4 +1,4 @@
-export class Recipe {
+class Recipe {
     constructor(data) {
         // Utilisation de valeurs par défaut si les propriétés ne sont pas définies dans le data
         this._id = data.id || null;
