@@ -1,7 +1,10 @@
 class SearchInput {
-    constructor(Recipes) {
+    constructor(Recipes, tagListSubject) {
         this.Recipes = Recipes
+        this.tagListSubject = tagListSubject
+
         this.$searchFormWrapper = document.querySelector('.search-form-wrapper')
+        this.$recipesWrapper = document.querySelector('.recipes-wrapper')
     }
 
     createSearchInput() {
@@ -21,7 +24,40 @@ class SearchInput {
         return $wrapper
     }
 
+    search() {
+        const searchInput = document.getElementById("search")
+        
+        searchInput.addEventListener('input', async e => {
+            this.$recipesWrapper.innerHTML = ""
+            const AdapterSearchLib = new SearchRecipesAdapter(this.Recipes, e.target.value)
+            const FilteredRecipes = await AdapterSearchLib.searchByInput()
+
+
+            if(FilteredRecipes.length > 0) {
+                FilteredRecipes.forEach(recipe => {
+                    const recipeObject = new Recipe(recipe)
+                    const Template = new RecipeCard(recipeObject)
+                    this.$recipesWrapper.appendChild(Template.createRecipeCard())         
+                })
+            } else {
+                this.$recipesWrapper.innerHTML = `<p class="empty-recipes">Aucune recettes ne corresponds à la recherche</p>`
+            }
+
+            // const Template = new RecipesCount(FilteredRecipes)
+            // this.$recipesCount.innerHTML = ``
+            // this.$recipesCount.appendChild(
+            //     Template.createRecipesCount()
+            // )
+            
+            const Template = new FilterForm(FilteredRecipes, this.tagListSubject)
+            Template.clearFilterWrapper()
+            Template.render()
+
+        })
+    }
+
     render() {
-        this.$searchFormWrapper.appendChild(this.createSearchInput())   
+        this.$searchFormWrapper.appendChild(this.createSearchInput()) 
+        this.search()  
     }
 }

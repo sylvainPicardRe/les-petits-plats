@@ -27,7 +27,7 @@ class App {
     }
 
     async renderSearchInput() {
-        const Template = new SearchInput(this.FullRecipes)
+        const Template = new SearchInput(this.FullRecipes, this.TagListSubject)
         Template.render()
     }
 
