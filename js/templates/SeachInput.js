@@ -32,7 +32,6 @@ class SearchInput {
             const AdapterSearchLib = new SearchRecipesAdapter(this.Recipes, e.target.value)
             const FilteredRecipes = await AdapterSearchLib.searchByInput()
 
-
             if(FilteredRecipes.length > 0) {
                 FilteredRecipes.forEach(recipe => {
                     const recipeObject = new Recipe(recipe)
@@ -52,6 +51,8 @@ class SearchInput {
             const Template = new FilterForm(FilteredRecipes, this.tagListSubject)
             Template.clearFilterWrapper()
             Template.render()
+
+            console.log(FilteredRecipes)
 
         })
     }

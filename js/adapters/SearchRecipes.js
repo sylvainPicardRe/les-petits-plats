@@ -5,7 +5,6 @@ class SearchRecipesAdapter {
     }
 
     async searchByInput() {
-        const search = new SearchV1(this.Recipes, this.search)
-        return search.searchByInput()
+        return await SearchV2.searchByInput(this.Recipes, this.search)  
     }
 }
