@@ -8,9 +8,8 @@ class TagListCounter {
     update(action, element) {
         if(action === 'add') {
             this._list.push(element)
-            console.log(this._list)
-        } else if (action === 'DEC') {
-            this._count -= 1
+        } else if (action === 'remove') {
+            this._list = this._list.filter(tag => tag !== element)
         } else {
             throw 'Action Inconnue'
         }

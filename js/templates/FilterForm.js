@@ -3,8 +3,6 @@ class FilterForm {
         this.Recipes = Recipes;
         this.tagListSubject = tagListSubject
 
-        console.log(this.tagListSubject)
-
         this.$wrapper = document.createElement( 'div' );
         this.$wrapper.classList.add( 'filter-wrapper' );
         this.$wrapper.classList.add( 'py-5' );
@@ -59,14 +57,20 @@ class FilterForm {
 
     async filterRecipes(query, list){
         this.clearRecipesWrapper()
-
+        
         const AdaptedFilterLib = new FilterRecipesAdapter(this.Recipes, query, list)
         const FilterdRecipes = await AdaptedFilterLib.filterByCriterion()
-
+        
         FilterdRecipes.forEach(Recipe => {
             const Template = new RecipeCard(Recipe)
             this.$recipesWrapper.appendChild(Template.createRecipeCard())
         })
+        
+        this.clearFilterWrapper()
+
+        const Template = new FilterForm(FilterdRecipes, this.tagListSubject)
+        Template.render()
+        
     }
 
     onChangeFilter() {
@@ -75,17 +79,20 @@ class FilterForm {
         this.$wrapper
             .querySelectorAll('.dropdown')
             .forEach(dropdown => {
-                dropdown.lastElementChild.addEventListener('click', e => {
-                    const query = e.target.text
-                    const list = dropdown.lastElementChild.classList[4]
-                    this.filterRecipes(query, list)
-                    that.tagListSubject.fire('add', query)
+                dropdown.lastElementChild.childNodes[3].querySelectorAll('.dropdown-item').forEach(item => {
+                    item.addEventListener('click', e => {
 
-                    this.clearTagsWrapper()
+                        const query = e.target.text
+                        const list = dropdown.lastElementChild.classList[4]
+                        this.filterRecipes(query, list)
+                        if(!that.tagListSubject._observer[0]._list.includes(query)){
+                            that.tagListSubject.fire('add', query)
+                        }
 
-                    that.tagListSubject._observer[0]._list.forEach(tagName => {
-                        const Template = new Tag(tagName)
-                        this.$tagsWrapper.appendChild(Template.createTag())
+                        this.clearTagsWrapper()
+
+                        const Template = new Tag(this.tagListSubject, this.Recipes)
+                        Template.render()
                     })
                 })
             }) 
@@ -95,6 +102,11 @@ class FilterForm {
     clearRecipesWrapper() {
         this.$recipesWrapper.innerHTML = ""
     }
+
+    clearFilterWrapper() {
+        this.$filterFormWrapper.innerHTML = ""
+    }
+
 
     clearTagsWrapper() {
         this.$tagsWrapper.innerHTML = ""
@@ -118,10 +130,11 @@ class FilterForm {
         `
 
         this.$wrapper.innerHTML = filtersForm
+        
+        this.$filterFormWrapper.appendChild(this.$wrapper)
 
         this.onChangeFilter()
         this.toggleShow()
 
-        this.$filterFormWrapper.appendChild(this.$wrapper)
     }
 }
