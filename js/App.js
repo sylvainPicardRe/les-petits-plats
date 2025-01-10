@@ -26,15 +26,15 @@ class App {
         Template.render()
     }
 
-    async renderSearchInput() {
-        const Template = new SearchInput(this.FullRecipes, this.TagListSubject)
+    async renderSearchForm() {
+        const Template = new SearchForm(this.FullRecipes, this.TagListSubject)
         Template.render()
     }
 
     async init() {
         await this.fetchRecipes();
         await this.renderFilterForm();
-        await this.renderSearchInput();
+        await this.renderSearchForm();
 
         this.FullRecipes.forEach(recipe => {
             const Template = new RecipeCard(recipe)
