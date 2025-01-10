@@ -27,7 +27,12 @@ class App {
     }
 
     async renderSearchForm() {
-        const Template = new SearchForm(this.FullRecipes, this.TagListSubject)
+        const Template = new SearchForm(this.FullRecipes)
+        Template.render()
+    }
+
+    async renderRecipesCount() {
+        const Template = new RecipesCount(this.FullRecipes)
         Template.render()
     }
 
@@ -35,6 +40,7 @@ class App {
         await this.fetchRecipes();
         await this.renderFilterForm();
         await this.renderSearchForm();
+        await this.renderRecipesCount();
 
         this.FullRecipes.forEach(recipe => {
             const Template = new RecipeCard(recipe)

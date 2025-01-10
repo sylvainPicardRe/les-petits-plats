@@ -1,13 +1,6 @@
 class SearchForm {
     constructor(Recipes) {
-        this.isSearchingByIngredient = false
-        this.isSearchingByUstensil = false
-        this.isSearchingByAppliance = false
-
-        // this.RecipeNameSearch = new RecipeNameSearch(Recipes)
-        // this.IngredientSearch = new IngredientSearch(Recipes)
-        // this.UstensilSearch = new UstensilSearch(Recipes)
-        // this.ApplianceSearch = new ApplianceSearch(Recipes)
+        this.Recipes = Recipes
 
         this.$wrapper = document.createElement('div')
         this.$wrapper.classList.add('search-form')
@@ -16,19 +9,35 @@ class SearchForm {
     }
 
     search(query) {
-        // let SearchedRecipes = null
+        let SearchedRecipes = []
 
-        // if(this.isSearchingByAppliance) {
-        //     SearchedRecipes = this.ApplianceSearch.search(query)
-        // } else if(this.isSearchingByUstensil) {
-        //     SearchedRecipes = this.UstensilSearch.search(query)
-        // } else if(this.isSearchingByIngredient) {
-        //     SearchedRecipes = this.IngredientSearch.search(query)
-        // } else {
-        //     SearchedRecipes = this.RecipeNameSearch.search(query)
-        // }
+        for(let i = 0; i < this.Recipes.length; i++) {
+            if(this.Recipes[i].appliance.toLowerCase().includes(query.toLowerCase())){
+                SearchedRecipes.push(this.Recipes[i])
+            } else if(this.Recipes[i].name.toLowerCase().includes(query.toLowerCase())) {
+                SearchedRecipes.push(this.Recipes[i])
+            }
+            else {
+                for(let j = 0; j < this.Recipes[i].ustensils.length; j++){
+                    if(this.Recipes[i].ustensils[j].toLowerCase().includes(query.toLowerCase())){
+                        SearchedRecipes.push(this.Recipes[i])
+                        
+                    }
+                }   
+                
+                for(let j = 0; j < this.Recipes[i].ingredients.length; j++) {
+                    if(this.Recipes[i].ingredients[j].ingredient.toLowerCase().includes(query.toLowerCase())){
+                        SearchedRecipes.push(this.Recipes[i])
+                    }
+                }
+            }
+        }
 
-        // this.displayRecipes(SearchedRecipes)
+        console.log(SearchedRecipes)
+        
+        
+
+        this.displayRecipes(SearchedRecipes)
     }
 
     clearRecipesWrapper() {
@@ -38,10 +47,14 @@ class SearchForm {
     displayRecipes(Recipes) {
         this.clearRecipesWrapper()
 
+        if(Recipes.length > 0) {
         Recipes.forEach(Recipe => {
             const Template = new RecipeCard(Recipe)
             this.$recipesWrapper.appendChild(Template.createRecipeCard())     
-        })
+        }) 
+        } else {
+            this.$recipesWrapper.innerHTML = `<p class="empty-recipes">Aucune recettes ne corresponds à la recherche</p>`
+        }
     }
 
     onSearch() {
@@ -53,7 +66,7 @@ class SearchForm {
                 if(query.length >= 3) {
                     this.search(query)
                 } else if(query.length === 0) {
-                    this.displayRecipes(Recipes)
+                    this.displayRecipes(this.Recipes)
                 }
             })
     }

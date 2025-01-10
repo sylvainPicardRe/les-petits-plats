@@ -6,10 +6,15 @@ class Tag {
         this.$tagsWrapper = document.querySelector( '.tags-wrapper' )
         this.$filterFormWrapper = document.querySelector( '.filter-form-wrapper' )
         this.$recipesWrapper = document.querySelector( '.recipes-wrapper' )
+        this.$recipeCountWrapper = document.querySelector('.recipes-count-wrapper')
     }
     
     clearTagsWrapper() {
         this.$tagsWrapper.innerHTML = ""
+    }
+
+    clearRecipeCountWrapper() {
+        this.$recipeCountWrapper.innerHTML = ""
     }
 
     clearRecipesWrapper() {
@@ -37,6 +42,7 @@ class Tag {
 
         this.clearRecipesWrapper()
         this.clearFilterFormWrapper()
+        this.clearRecipeCountWrapper()
 
         this.Recipes.forEach(Recipe => {
             const Template = new RecipeCard(Recipe)
@@ -45,6 +51,9 @@ class Tag {
 
         const Template = new FilterForm(this.Recipes, this.tagListSubject)
         Template.render()
+
+        const TemplateRecipeCount = new RecipesCount(this.Recipes)
+        TemplateRecipeCount.render()
     }
 
     createTag(tagName) {
