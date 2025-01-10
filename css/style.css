@@ -12,7 +12,7 @@ body {
     background-color: var(--bg-color) !important;
 }
 
-h1, h5{
+h1, h5, .recipes-count-wrapper{
     font-family: "Anton", sans-serif !important;
 }
 
@@ -253,4 +253,15 @@ h1, h5{
     margin: auto;
     text-align: center;
 }
+
+/* Style général pour filter-count-wrapper*/
+.filter-count-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.filter-form-wrapper {
+    flex: 1;
+}
+
 

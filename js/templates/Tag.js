@@ -6,6 +6,7 @@ class Tag {
         this.$tagsWrapper = document.querySelector( '.tags-wrapper' )
         this.$filterFormWrapper = document.querySelector( '.filter-form-wrapper' )
         this.$recipesWrapper = document.querySelector( '.recipes-wrapper' )
+        this.$recipesCountWrapper = document.querySelector('.recipes-count-wrapper')
     }
     
     clearTagsWrapper() {
@@ -45,6 +46,10 @@ class Tag {
 
         const Template = new FilterForm(this.Recipes, this.tagListSubject)
         Template.render()
+
+        const TemplateRecipesCount = new RecipesCount(this.Recipes)
+            this.$recipesCountWrapper.innerHTML = ``
+            TemplateRecipesCount.render()
     }
 
     createTag(tagName) {

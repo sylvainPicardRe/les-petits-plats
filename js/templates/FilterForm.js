@@ -10,6 +10,7 @@ class FilterForm {
         this.$filterFormWrapper = document.querySelector( '.filter-form-wrapper' )
         this.$recipesWrapper = document.querySelector( '.recipes-wrapper' )
         this.$tagsWrapper = document.querySelector( '.tags-wrapper' )
+        this.$recipesCountWrapper = document.querySelector('.recipes-count-wrapper')
     }
 
     createDropdown(title, dropdownId, type) {
@@ -70,6 +71,10 @@ class FilterForm {
 
         const Template = new FilterForm(FilterdRecipes, this.tagListSubject)
         Template.render()
+
+        const TemplateRecipesCount = new RecipesCount(FilterdRecipes)
+        this.$recipesCountWrapper.innerHTML = ``
+        TemplateRecipesCount.render()
         
     }
 
@@ -93,6 +98,7 @@ class FilterForm {
 
                         const Template = new Tag(this.tagListSubject, this.Recipes)
                         Template.render()
+                        console.log(Template)
                     })
                 })
             }) 

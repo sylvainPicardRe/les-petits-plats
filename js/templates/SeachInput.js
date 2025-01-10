@@ -5,6 +5,7 @@ class SearchInput {
 
         this.$searchFormWrapper = document.querySelector('.search-form-wrapper')
         this.$recipesWrapper = document.querySelector('.recipes-wrapper')
+        this.$recipesCountWrapper = document.querySelector('.recipes-count-wrapper')
     }
 
     createSearchInput() {
@@ -28,32 +29,33 @@ class SearchInput {
         const searchInput = document.getElementById("search")
         
         searchInput.addEventListener('input', async e => {
-            this.$recipesWrapper.innerHTML = ""
-            const AdapterSearchLib = new SearchRecipesAdapter(this.Recipes, e.target.value)
-            const FilteredRecipes = await AdapterSearchLib.searchByInput()
-
-            if(FilteredRecipes.length > 0) {
-                FilteredRecipes.forEach(recipe => {
-                    const recipeObject = new Recipe(recipe)
-                    const Template = new RecipeCard(recipeObject)
-                    this.$recipesWrapper.appendChild(Template.createRecipeCard())         
-                })
-            } else {
-                this.$recipesWrapper.innerHTML = `<p class="empty-recipes">Aucune recettes ne corresponds à la recherche</p>`
-            }
-
-            // const Template = new RecipesCount(FilteredRecipes)
-            // this.$recipesCount.innerHTML = ``
-            // this.$recipesCount.appendChild(
-            //     Template.createRecipesCount()
-            // )
+            if(e.target.value.length >= 3) {
+                this.$recipesWrapper.innerHTML = ""
             
-            const Template = new FilterForm(FilteredRecipes, this.tagListSubject)
-            Template.clearFilterWrapper()
-            Template.render()
+                const AdapterSearchLib = new SearchRecipesAdapter(this.Recipes, e.target.value)
+                const FilteredRecipes = await AdapterSearchLib.searchByInput()
 
-            console.log(FilteredRecipes)
+                if(FilteredRecipes.length > 0) {
+                    FilteredRecipes.forEach(recipe => {
+                        const recipeObject = new Recipe(recipe)
+                        const Template = new RecipeCard(recipeObject)
+                        this.$recipesWrapper.appendChild(Template.createRecipeCard())         
+                    })
+                } else {
+                    this.$recipesWrapper.innerHTML = `<p class="empty-recipes">Aucune recettes ne corresponds à la recherche</p>`
+                }
 
+                const TemplateRecipesCount = new RecipesCount(FilteredRecipes)
+                this.$recipesCountWrapper.innerHTML = ``
+                this.$recipesCountWrapper.appendChild(
+                    TemplateRecipesCount.render()
+                )
+                
+                const Template = new FilterForm(FilteredRecipes, this.tagListSubject)
+                Template.clearFilterWrapper()
+                Template.render()
+
+            }
         })
     }
 
