@@ -1,41 +1,31 @@
 class SearchForm {
-    constructor(Recipes) {
+    constructor(Recipes, tagListSubject) {
         this.Recipes = Recipes
+
+        this.tagListSubject = tagListSubject
 
         this.$wrapper = document.createElement('div')
         this.$wrapper.classList.add('search-form')
         this.$searchFormWrapper = document.querySelector('.search-form-wrapper')
         this.$recipesWrapper = document.querySelector('.recipes-wrapper')
+        this.$filterFormWrapper = document.querySelector( '.filter-form-wrapper' )
+        this.$recipeCountWrapper = document.querySelector('.recipes-count-wrapper')
     }
 
     search(query) {
-        let SearchedRecipes = []
+        let SearchedRecipes = null
 
-        for(let i = 0; i < this.Recipes.length; i++) {
-            if(this.Recipes[i].appliance.toLowerCase().includes(query.toLowerCase())){
-                SearchedRecipes.push(this.Recipes[i])
-            } else if(this.Recipes[i].name.toLowerCase().includes(query.toLowerCase())) {
-                SearchedRecipes.push(this.Recipes[i])
+        this.Recipes.forEach(recipe => {
+            if(recipe.name.toLowerCase().includes(query.toLowerCase())) {
+                SearchedRecipes = this.Recipes.filter(recipe => recipe.name.toLowerCase().includes(query.toLowerCase()))
+            } else if(recipe.ingredients.includes(query.toLowerCase())) {
+                SearchedRecipes = this.Recipes.filter(recipe => recipe.ingredients.includes(query.toLowerCase()))
+            } else if(recipe.ustensils.includes(query.toLowerCase())) {
+                SearchedRecipes = this.Recipes.filter(recipe => recipe.ustensils.includes(query.toLowerCase()))
+            } else if(recipe.appliance.includes(query.toLowerCase())) {
+                SearchedRecipes = this.Recipes.filter(recipe => recipe.appliance.includes(query.toLowerCase))
             }
-            else {
-                for(let j = 0; j < this.Recipes[i].ustensils.length; j++){
-                    if(this.Recipes[i].ustensils[j].toLowerCase().includes(query.toLowerCase())){
-                        SearchedRecipes.push(this.Recipes[i])
-                        
-                    }
-                }   
-                
-                for(let j = 0; j < this.Recipes[i].ingredients.length; j++) {
-                    if(this.Recipes[i].ingredients[j].ingredient.toLowerCase().includes(query.toLowerCase())){
-                        SearchedRecipes.push(this.Recipes[i])
-                    }
-                }
-            }
-        }
-
-        console.log(SearchedRecipes)
-        
-        
+        })
 
         this.displayRecipes(SearchedRecipes)
     }
@@ -47,7 +37,17 @@ class SearchForm {
     displayRecipes(Recipes) {
         this.clearRecipesWrapper()
 
-        if(Recipes.length > 0) {
+        this.clearFilterWrapper()
+
+        this.clearRecipeCoutWrapper()
+
+        const Template = new FilterForm(Recipes, this.tagListSubject)
+        Template.render()
+
+        const TemplateRecipeCount = new RecipesCount(Recipes)
+        TemplateRecipeCount.render()
+
+        if(Recipes !== null) {
         Recipes.forEach(Recipe => {
             const Template = new RecipeCard(Recipe)
             this.$recipesWrapper.appendChild(Template.createRecipeCard())     
@@ -69,6 +69,14 @@ class SearchForm {
                     this.displayRecipes(this.Recipes)
                 }
             })
+    }
+
+    clearFilterWrapper() {
+        this.$filterFormWrapper.innerHTML = ''
+    }
+
+    clearRecipeCoutWrapper() {
+        this.$recipeCountWrapper.innerHTML = ''
     }
 
     render() {

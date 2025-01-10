@@ -27,7 +27,7 @@ class App {
     }
 
     async renderSearchForm() {
-        const Template = new SearchForm(this.FullRecipes)
+        const Template = new SearchForm(this.FullRecipes, this.TagListSubject)
         Template.render()
     }
 
