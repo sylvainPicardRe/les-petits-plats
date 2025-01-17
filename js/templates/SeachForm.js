@@ -69,6 +69,10 @@ class SearchForm {
                     this.displayRecipes(this.Recipes)
                 }
             })
+        this.$wrapper.querySelector('form')
+        .addEventListener('submit', e => {
+            e.preventDefault()
+        })  
     }
 
     render() {
